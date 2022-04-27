@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.crtCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;;
+    padding: 0 3px;
+    margin-bottom: 25px;
+    vertical-align: top;
+}
+
+.navbarIcons{
+    height: 50px;
+    width: 50px;
+}
+
+.carouselImages{
+    width: 100vw;
+    height: 50vh;
+}
+
+body {
+    background-image:url("https://helios-i.mashable.com/imagery/articles/072lIcNUyX8S7dErUXzHLuN/hero-image.fill.size_1248x702.v1623382106.jpg");
+}
+
+.containerBack{
+    background-color: white;
+}
