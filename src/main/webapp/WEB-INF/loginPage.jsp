@@ -39,6 +39,8 @@
 					value="${_csrf.token}" /> <input type="submit" value="Login!" />
 			</form>
 		</div>
+		<a href="registration">Register</a>
 	</div>
+	
 </body>
 </html>

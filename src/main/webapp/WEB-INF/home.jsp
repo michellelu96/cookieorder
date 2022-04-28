@@ -14,7 +14,7 @@
 <!-- change to match your file/naming structure -->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>Cookie Monsters Bakery</title>
 </head>
 <body>
 	<div class="containerBack container mt-5">
@@ -31,31 +31,31 @@
 					<ul class="navbar-nav me-auto mb-2 mb-xl-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Cookies</a>
-						</li>
-						<c:if test="${user.id}">
-						<li>
-						<form:form id="logoutForm" method="POST" action="/logout">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input  class="btn btn-link" type="submit" value="Logout!" />
-						</form:form>
-							</li>
-						<li>
-							Hello <c:out value="${user.name }"/>
-						</li>
+						<li class="nav-item"><a class="nav-link" href="/allCookies">All
+								Cookies</a> </li>
+						<c:if test="${ user.id == null}">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/login">Login</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/registration">Register</a></li>
+						</c:if>
+						<c:if test="${user.id != null}">
+							<li><form:form id="logoutForm" method="POST"
+									action="/logout">
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
+									<input class="btn btn-link" type="submit" value="Logout!" />
+								</form:form></li>
 						</c:if>
 					</ul>
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-secondary" type="submit">Search</button>
-					</form>
 				</div>
-				<a href="#"><img class="navbarIcons"
-					src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38239/preview.svg"
-					alt="shopping cart icon"></a>
-				<p class="crtCount rounded-circle">+</p>
-			</div>
+				<c:if test="${ user.id != null}">
+					<a href="/cart"><img class="navbarIcons"
+						src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38239/preview.svg"
+						alt="shopping cart icon"></a>
+					<p class="crtCount rounded-circle">+</p>
+				</c:if>
+				</div>
 		</nav>
 		<div id="carouselCrossfade" class="carousel slide carousel-fade"
 			data-bs-ride="carousel">
@@ -69,24 +69,20 @@
 						<p>Yummy Cookie!</p>
 					</div>
 				</div>
-				<div class="carousel-item">
-					<img
-						src="https://www.bakefromscratch.com/wp-content/uploads/2021/05/Snickerdoodle332SWSheader-696x391.jpg"
-						class="d-block w-100 carouselImages" alt="Slide 2">
-					<div class="carousel-caption d-none d-sm-block">
-						<h5>Snickerdoodle Cookie</h5>
-						<p>Sugar cookies that are coated in sugar and cinnamon</p>
+				<c:forEach var="product" items="${products}">
+					<div class="carousel-item">
+						<img src="${product.photo }" class="d-block w-100 carouselImages"
+							alt="Slide 1">
+						<div class="carousel-caption d-none d-sm-block">
+							<h5>
+								<c:out value="${product.name }" />
+							</h5>
+							<p>
+								<c:out value="${product.description }" />
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<img
-						src="https://www.shugarysweets.com/wp-content/uploads/2021/06/oreo-cheesecake-cookies-recipe.jpg"
-						class="d-block w-100 carouselImages" alt="Slide 3">
-					<div class="carousel-caption d-none d-sm-block">
-						<h5>Oreo Cheesecake Cookies</h5>
-						<p>Cookies based off of oreo cheesecakes</p>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 			<a class="carousel-control-prev" href="#carouselCrossfade"
 				role="button" data-bs-slide="prev"> <span
@@ -98,30 +94,23 @@
 				class="visually-hidden">Next</span>
 			</a>
 			<div
-				class="d-flex flex-row bd-highlight justify-content-around mt-3 flex-wrap">
-				<div class="card " style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
+				class="d-flex flex-row justify-content-evenly bd-highlight mt-3 flex-wrap p-2">
+				<c:forEach var="product" items="${products}">
+					<div class=" p-2 bd-highlight">
+						<div class="card " style="width: 18rem;">
+							<img src="${product.photo }" class="card-img-top cardImages"
+								alt="cookie photo">
+							<div class="card-body">
+								<p class="card-text text-center">
+									<a href="/oneCookie/${product.id }">${product.name}</a> <br>
+									${product.description}
+								</p>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
-		</div>
+	</div>
 </body>
 </html>

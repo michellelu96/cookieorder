@@ -14,4 +14,10 @@ public interface ProductRepository extends CrudRepository<Product,Long>{
 	List<Product> findAll();
 
 	Optional<Product> findByNameContaining(String search);
+	
+	Optional<Product> findById(Long id);
+	
+	 List<Product>findTop10ByOrderByCreatedAtDesc();
+	 
+	 List<Product>findTop3ByOrderByCreatedAtDesc();
 }

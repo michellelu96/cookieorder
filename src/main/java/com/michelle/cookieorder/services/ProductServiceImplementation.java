@@ -18,14 +18,14 @@ public class ProductServiceImplementation implements ProductService{
 	@Autowired
 	private ProductRepository productRepository;
 	
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public List<Product> getAllProducts(){
 		return productRepository.findAll();
 	}
 	
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public Product getProductById(Long id) {
@@ -34,21 +34,21 @@ public class ProductServiceImplementation implements ProductService{
     	else return null;
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN') or principal.id == #product.getUser().getId()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN') or principal.id == #product.getUser().getId()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public void updateProduct(Product product) {
         productRepository.save(product);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN') or principal.id == #product.getUser().getId()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public void deleteProduct(Long id) {
@@ -56,11 +56,19 @@ public class ProductServiceImplementation implements ProductService{
     }
     
 	
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public Optional<Product> getByName(String search){
 		return productRepository.findByNameContaining(search);
 	}
+	
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @Transactional
+    @Override
+    public List<Product> getThreeProducts(){
+		return productRepository.findTop3ByOrderByCreatedAtDesc();
+	}
+
 
 }

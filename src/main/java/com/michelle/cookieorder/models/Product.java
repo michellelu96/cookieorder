@@ -1,7 +1,6 @@
 package com.michelle.cookieorder.models;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +8,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="products")
@@ -25,10 +27,10 @@ public class Product {
 	@NotEmpty(message="Name is required!")
 	private String name;
 	
-	@NotEmpty(message="Quantity is required!")
-	private String cookieQuantity;
+	@NotNull
+	private Integer cookieQuantity;
 	
-	@NotEmpty(message="Price is required!")
+	@DecimalMin("0.0")
 	private Double cookiePrice;
 	
 	@NotEmpty(message="Description is required!")
@@ -41,6 +43,9 @@ public class Product {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cart_id")
+	 private Cart cart;
 	
 	public Product() {};
 	
@@ -75,11 +80,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getCookieQuantity() {
+	public Integer getCookieQuantity() {
 		return cookieQuantity;
 	}
 
-	public void setCookieQuantity(String cookieQuantity) {
+	public void setCookieQuantity(Integer cookieQuantity) {
 		this.cookieQuantity = cookieQuantity;
 	}
 
@@ -124,4 +129,13 @@ public class Product {
 		this.updatedAt = updatedAt;
 	}
 
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	
 }

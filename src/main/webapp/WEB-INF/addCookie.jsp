@@ -17,7 +17,7 @@
 <title>Cookie Monsters Bakery</title>
 </head>
 <body class="container">
-	<form:form action="/admin/cookie/addCookie" method="post"
+	<form:form action="/admin/cookie/addCookies" method="post"
 		modelAttribute="product">
 		<p>
 			<form:label path="name">Product Name:</form:label>
@@ -44,6 +44,7 @@
 			<form:input path="photo" />
 			<form:errors path="photo" />
 		</p>
+		<button>Submit</button>
 	</form:form>
 </body>
 </html>

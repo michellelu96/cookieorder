@@ -18,7 +18,8 @@ public interface ProductService {
 	
 	void deleteProduct(Long id);
 
-
 	Optional<Product> getByName(String search);
+	
+	List<Product> getThreeProducts();
 	
 }
