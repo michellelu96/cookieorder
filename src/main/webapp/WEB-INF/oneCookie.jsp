@@ -31,7 +31,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-xl-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="/">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Cookies</a>
+						<li class="nav-item"><a class="nav-link" href="/allCookies">All Cookies</a>
 						</li>
 						<c:if test="${userId != null}">
 							<li><form:form id="logoutForm" method="POST"
@@ -42,7 +42,7 @@
 								</form:form></li>
 						</c:if>
 					</ul>
-					<form class="d-flex">
+					<!--<form class="d-flex">
 						<input class="form-control me-2" type="search"
 							placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -53,7 +53,8 @@
 					src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38239/preview.svg"
 					alt="shopping cart icon"></a>
 				<p class="crtCount rounded-circle">+</p>
-				</c:if>
+				</c:if>-->
+				</div>
 			</div>
 		</nav>
 		<div class="row">
@@ -66,9 +67,9 @@
 					<c:out value="${product.description }" />
 					<br>
 				</p>
-				<form:form action="/cart/add/${product.id}" method="post" modelAttribute="cart">
+			<!-- <form:form action="/cart/add/${product.id}" method="post" modelAttribute="cart">
 					<button>Add to Cart</button>
-				</form:form>
+				</form:form> -->
 			</div>
 			
 		</div>

@@ -49,12 +49,12 @@
 						</c:if>
 					</ul>
 				</div>
-				<c:if test="${ user.id != null}">
+				<!--<c:if test="${ user.id != null}">
 					<a href="/cart"><img class="navbarIcons"
 						src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38239/preview.svg"
 						alt="shopping cart icon"></a>
 					<p class="crtCount rounded-circle">+</p>
-				</c:if>
+				</c:if>-->
 				</div>
 		</nav>
 		<div id="carouselCrossfade" class="carousel slide carousel-fade"
@@ -66,7 +66,7 @@
 						class="d-block w-100 carouselImages" alt="Slide 1">
 					<div class="carousel-caption d-none d-sm-block">
 						<h5>Brown Butter Toffee Chocolate Chip Cookie</h5>
-						<p>Yummy Cookie!</p>
+						<p>Cookie that has been marinating in the fridge for four days to make a nice, soft and gooey cookie</p>
 					</div>
 				</div>
 				<c:forEach var="product" items="${products}">

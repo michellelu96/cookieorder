@@ -41,10 +41,10 @@
 						</c:if>
 					</ul>
 				</div>
-				<a href="/cart"><img class="navbarIcons"
+				<!--<a href="/cart"><img class="navbarIcons"
 					src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38239/preview.svg"
 					alt="shopping cart icon"></a>
-				<p class="crtCount rounded-circle">+</p>
+				<p class="crtCount rounded-circle">+</p>-->
 			</div>
 		</nav>
 		<div

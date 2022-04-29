@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page isErrorPage="true"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page isErrorPage="true" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/main.css">
-<!-- change to match your file/naming structure -->
+<link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 
@@ -35,12 +34,12 @@
 						</li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="/admin/cookie/addCookie">addCookie</a></li>
-						<li class="btn btn-link"><form:form id="logoutForm"
-								method="POST" action="/logout">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-								<input type="submit" value="Logout!" />
-							</form:form></li>
+						<li class="btn btn-link">
+						<form:form id="logoutForm" method="POST" action="/logout">
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" /> <input type="submit" value="Logout!" />
+						</form:form>
+						</li>
 					</ul>
 					<form class="d-flex">
 						<input class="form-control me-2" type="search"
@@ -57,30 +56,40 @@
 					alt="User Icon"></a>
 			</div>
 		</nav>
-		<div
-			class="d-flex flex-row justify-content-evenly bd-highlight mt-3 flex-wrap p-2">
-			<c:forEach var="product" items="${products}">
-				<div class=" p-2 bd-highlight">
-					<div class="card " style="width: 18rem;">
-						<img src="${product.photo }" class="card-img-top cardImages"
-							alt="cookie photo">
-						<div class="card-body">
-							<p class="card-text text-center">
-								${product.name} <br> ${product.description}
-							</p>
-							<div class="d-flex justify-content-center">
-								<a href="/admin/cookie/edit/${product.id}"
-									class="btn btn-primary">Edit</a>
-								<form action="/admin/cookie/delete/${product.id}" method="post">
-									<input type="hidden" name="_method" value="delete"> <input
-										type="submit" value="Delete" class="btn btn-danger">
-										</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
+		<div class="d-flex flex-column justify-content-center text-center pt-3">
+		<h1 class="text-center">Edit Cookie</h1>
+	<form:form action="/admin/cookie/edit/{id}" method="post"
+		modelAttribute="product">
+		<input type="hidden" name="_method" value="put">
+		<p>
+			<form:label path="name">Product Name:</form:label>
+			<form:input path="name" value="${product.name }"/>
+			<form:errors path="name" />
+		</p>
+		<p>
+			<form:label path="cookieQuantity">Quantity:</form:label>
+			<form:input path="cookieQuantity" type="number" min="0" value="${product.cookieQuantity }"/>
+			<form:errors path="cookieQuantity" />
+		</p>
+		<p>
+			<form:label path="cookiePrice">Price:</form:label>
+			<form:input path="cookiePrice" type="number" min="0" step=".01" value="${product.cookiePrice }"/>
+			<form:errors path="cookiePrice" />
+		</p>
+		<p>
+			<form:label path="description">Description:</form:label>
+			<form:input path="description" value="${product.description }"/>
+			<form:errors path="description" />
+		</p>
+		<p>
+			<form:label path="photo">Link to image:</form:label>
+			<form:input path="photo" value="${product.photo }"/>
+			<form:errors path="photo" />
+		</p>
+		<button>Submit</button>
+	</form:form>
+	<div class="pt-3"></div>
+	</div>
 	</div>
 </body>
 </html>
